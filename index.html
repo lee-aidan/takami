@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TAKAMI Engineering Group, Inc.</title>
+    <meta name="description"
+        content="TAKAMI Engineering Group — structural engineering, design management and building permits for residential and commercial projects across the San Francisco Bay Area." />
+    <meta name="theme-color" content="#141414" />
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+    <!-- Social / link sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="TAKAMI Engineering Group, Inc." />
+    <meta property="og:title" content="TAKAMI Engineering Group, Inc." />
+    <meta property="og:description"
+        content="Structural engineering, design management and building permits for residential and commercial projects across the San Francisco Bay Area." />
+    <meta property="og:url" content="https://takamigroup.com/" />
+    <meta name="twitter:card" content="summary" />
+    <!-- TODO: add og:image (1200×630) once project photography is available -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Reusable logo mark (logo-only) for the intro + footer -->
+    <template id="mark">
+        <svg class="mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <g fill="none" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke">
+                <rect x="6" y="6" width="88" height="88" />
+                <line x1="6" y1="50" x2="94" y2="50" />
+                <rect x="40" y="28" width="20" height="22" />
+                <rect x="29" y="43" width="11" height="7" />
+                <rect x="60" y="43" width="11" height="7" />
+                <rect x="45.5" y="50" width="9" height="18" />
+                <line x1="50" y1="68" x2="50" y2="94" />
+            </g>
+        </svg>
+    </template>
+
+    <!-- ============================================================
+         INTRO — black screen, white mark, folds into the corner
+         (CSS-driven; auto-skipped under prefers-reduced-motion)
+    ============================================================= -->
+    <div id="intro" aria-hidden="true">
+        <div class="intro__veil"></div>
+        <span class="intro__mark" data-mark></span>
+        <div class="intro__words">
+            <span class="intro__title">TAKAMI</span>
+            <span class="intro__sub">ENGINEERING GROUP, INC.</span>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         NAV — a single corner mark that morphs into a menu
+    ============================================================= -->
+    <header class="nav" id="top">
+        <div class="nav__inner">
+        <button class="brand" id="brandToggle" type="button" aria-label="Open menu" aria-expanded="false"
+            aria-controls="menu">
+            <span class="brand__mark">
+                <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+                    <g class="m-logo" fill="none" stroke="currentColor" stroke-width="2"
+                        vector-effect="non-scaling-stroke">
+                        <rect x="6" y="6" width="88" height="88" />
+                        <line x1="6" y1="50" x2="94" y2="50" />
+                        <rect x="40" y="28" width="20" height="22" />
+                        <rect x="29" y="43" width="11" height="7" />
+                        <rect x="60" y="43" width="11" height="7" />
+                        <rect x="45.5" y="50" width="9" height="18" />
+                        <line x1="50" y1="68" x2="50" y2="94" />
+                    </g>
+                </svg>
+                <!-- hamburger / X drawn as CSS bars: pixel-crisp, all identical -->
+                <span class="brand__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+            </span>
+            <span class="brand__word">TAKAMI<em>Engineering Group</em></span>
+        </button>
+        </div>
+    </header>
+
+    <!-- ============================================================
+         MENU — full-screen overlay
+    ============================================================= -->
+    <div class="menu" id="menu" aria-hidden="true">
+        <nav class="menu__nav" aria-label="Primary">
+            <a href="#top">Home</a>
+            <a href="#work">Work</a>
+            <a href="#practice">Practice</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="menu__meta">
+            <div>
+                <h3>Office</h3>
+                <p>1041A Folger Ave.<br>Berkeley, CA 94710</p>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>
+                    <a href="tel:+15105490440">510.549.0440</a><br>
+                    <a href="mailto:takamigroup@gmail.com">takamigroup@gmail.com</a>
+                </p>
+            </div>
+            <div>
+                <h3>Hours</h3>
+                <p>Monday – Friday<br>8:00 AM – 5:00 PM</p>
+            </div>
+        </div>
+    </div>
+
+    <main>
+
+        <!-- Hero -->
+        <section class="hero reveal">
+            <p class="eyebrow">San Francisco Bay Area · Est. 1998</p>
+            <h1 class="hero__statement">
+                Structural engineering that<br>
+                finds the balance between<br>
+                <span class="nowrap"><em>art</em> and <em>function</em>.</span>
+            </h1>
+            <p class="hero__sub">
+                Consulting · Design Management · Building Permits
+            </p>
+            <hr class="hero__rule">
+        </section>
+
+        <!-- Intro copy -->
+        <section class="intro-copy reveal">
+            <p class="intro-copy__lead">
+                We manage every project from inception to completion — residential,
+                light-commercial, mixed-use and hospitality — working alongside all
+                awarded trades to alleviate the client's task of coordination,
+                procurement and inspection.
+            </p>
+            <dl class="stats">
+                <div>
+                    <dt>300+</dt>
+                    <dd>Bay Area projects permitted</dd>
+                </div>
+                <div>
+                    <dt>75+</dt>
+                    <dd>Combined years in the field</dd>
+                </div>
+                <div>
+                    <dt>1998</dt>
+                    <dd>Serving the Bay Area since</dd>
+                </div>
+            </dl>
+        </section>
+
+        <!-- Selected work -->
+        <section class="work" id="work">
+            <div class="section-head reveal">
+                <h2>Selected Work</h2>
+                <span class="section-index">Index 01 — 06</span>
+            </div>
+
+            <div class="grid" data-stagger>
+                <a class="tile" href="#" aria-label="American Industrial Center">
+                    <span class="tile__img" data-label="Commercial"></span>
+                    <span class="tile__foot">
+                        <span class="tile__no">01</span>
+                        <span class="tile__meta">
+                            <span class="tile__name">American Industrial Center</span>
+                            <span class="tile__place">San Francisco, CA</span>
+                        </span>
+                    </span>
+                </a>
+                <a class="tile" href="#" aria-label="Mason + Pacific Restaurant">
+                    <span class="tile__img" data-label="Hospitality"></span>
+                    <span class="tile__foot">
+                        <span class="tile__no">02</span>
+                        <span class="tile__meta">
+                            <span class="tile__name">Mason + Pacific Restaurant</span>
+                            <span class="tile__place">San Francisco, CA</span>
+                        </span>
+                    </span>
+                </a>
+                <a class="tile" href="#" aria-label="Foxtail Catering &amp; Events">
+                    <span class="tile__img" data-label="Commercial Kitchen"></span>
+                    <span class="tile__foot">
+                        <span class="tile__no">03</span>
+                        <span class="tile__meta">
+                            <span class="tile__name">Foxtail Catering &amp; Events</span>
+                            <span class="tile__place">San Francisco, CA</span>
+                        </span>
+                    </span>
+                </a>
+                <a class="tile" href="#" aria-label="1859 Pine Street">
+                    <span class="tile__img" data-label="Residential"></span>
+                    <span class="tile__foot">
+                        <span class="tile__no">04</span>
+                        <span class="tile__meta">
+                            <span class="tile__name">1859 Pine Street</span>
+                            <span class="tile__place">San Francisco, CA</span>
+                        </span>
+                    </span>
+                </a>
+                <a class="tile" href="#" aria-label="451 Jackson Street">
+                    <span class="tile__img" data-label="Commercial"></span>
+                    <span class="tile__foot">
+                        <span class="tile__no">05</span>
+                        <span class="tile__meta">
+                            <span class="tile__name">451 Jackson Street</span>
+                            <span class="tile__place">San Francisco, CA</span>
+                        </span>
+                    </span>
+                </a>
+                <a class="tile" href="#" aria-label="Hidden Valley Lake Residence">
+                    <span class="tile__img" data-label="Residential"></span>
+                    <span class="tile__foot">
+                        <span class="tile__no">06</span>
+                        <span class="tile__meta">
+                            <span class="tile__name">Hidden Valley Lake</span>
+                            <span class="tile__place">Lake County, CA</span>
+                        </span>
+                    </span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Practice / capabilities -->
+        <section class="practice" id="practice">
+            <div class="section-head reveal">
+                <h2>Practice</h2>
+                <span class="section-index">Capabilities</span>
+            </div>
+            <ul class="capabilities" data-stagger>
+                <li>New structural design</li>
+                <li>Seismic upgrades &amp; retrofits</li>
+                <li>Soft-story retrofit design</li>
+                <li>Foundation upgrades</li>
+                <li>Retaining wall systems</li>
+                <li>Tenant improvements</li>
+                <li>Remodels &amp; additions</li>
+                <li>Building permit management</li>
+            </ul>
+            <p class="practice__note">
+                Collaborating with mechanical and electrical engineers, energy
+                consultants, engineering geologists and land surveyors on every
+                phase of work.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Contact / footer -->
+    <footer class="footer" id="contact">
+        <div class="footer__cta reveal">
+            <p class="footer__eyebrow">Start a project</p>
+            <h2>Let's build something<br>that lasts.</h2>
+            <a class="button" href="mailto:takamigroup@gmail.com">
+                Start a conversation <span class="button__arrow" aria-hidden="true">→</span>
+            </a>
+        </div>
+
+        <div class="footer__grid">
+            <div>
+                <h3>Office</h3>
+                <p>1041A Folger Ave.<br>Berkeley, CA 94710</p>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>
+                    <a href="tel:+15105490440">510.549.0440</a><br>
+                    <a href="mailto:takamigroup@gmail.com">takamigroup@gmail.com</a>
+                </p>
+            </div>
+            <div>
+                <h3>Hours</h3>
+                <p>Monday – Friday<br>8:00 AM – 5:00 PM</p>
+            </div>
+        </div>
+
+        <div class="footer__base">
+            <span class="footer__mark" data-mark></span>
+            <p>© <span id="year"></span> TAKAMI Engineering Group, Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            // Inject the logo-only mark into [data-mark] slots (intro + footer)
+            var tpl = document.getElementById('mark');
+            document.querySelectorAll('[data-mark]').forEach(function (slot) {
+                slot.appendChild(tpl.content.cloneNode(true));
+            });
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // ---- Intro: start the sequence only once fonts are ready, so the
+            //      logo mark and the wordmark fade in at the same instant ----
+            var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (motionOK) {
+                document.body.classList.add('intro-lock');
+                var started = false;
+                var startIntro = function () {
+                    if (started) return;
+                    started = true;
+                    document.body.classList.add('intro-ready');
+                    window.setTimeout(function () {
+                        document.body.classList.remove('intro-lock');
+                        var intro = document.getElementById('intro');
+                        if (intro) intro.remove();
+                    }, 5600);
+                };
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(startIntro);
+                    window.setTimeout(startIntro, 1200); // fallback if fonts stall
+                } else {
+                    startIntro();
+                }
+            }
+
+            // ---- Menu toggle: logo <-> hamburger <-> X ----
+            var toggle = document.getElementById('brandToggle');
+            var menu = document.getElementById('menu');
+            function setMenu(open) {
+                toggle.classList.toggle('is-open', open);
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+                menu.classList.toggle('is-open', open);
+                menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+                document.body.classList.toggle('menu-open', open);
+            }
+            toggle.addEventListener('click', function () {
+                setMenu(!toggle.classList.contains('is-open'));
+            });
+            menu.querySelectorAll('a').forEach(function (a) {
+                a.addEventListener('click', function () { setMenu(false); });
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') setMenu(false);
+            });
+
+            // ---- Scroll reveal (+ staggered children) ----
+            var revealEls = document.querySelectorAll('.reveal, [data-stagger]');
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (e) {
+                        if (!e.isIntersecting) return;
+                        var el = e.target;
+                        if (el.hasAttribute('data-stagger')) {
+                            [].forEach.call(el.children, function (child, i) {
+                                child.style.transitionDelay = (i * 70) + 'ms';
+                            });
+                        }
+                        el.classList.add('is-visible');
+                        io.unobserve(el);
+                    });
+                }, { threshold: 0.12 });
+                revealEls.forEach(function (el) { io.observe(el); });
+            } else {
+                revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+            }
+        })();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# Local dev / preview config
+.claude/
+
+# Internal notes — do not publish
+BRIEFING.md
+
+# Design source asset (kept local; attached to email, not deployed)
+takami_logo.jpg
