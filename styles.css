@@ -33,9 +33,37 @@ html {
     scroll-padding-top: var(--header-h);
     /* the footer's dark colour fills any overscroll past the bottom (no white gap) */
     background: var(--ink);
-    /* always reserve the scrollbar's width so nothing shifts sideways when it
-       appears after the intro (or on any lock/unlock of scrolling) */
+    /* reserve the scrollbar's width so nothing shifts when the page unlocks
+       after the intro — the custom bar lives in this already-reserved gutter */
     scrollbar-gutter: stable;
+    /* Firefox: slim custom bar (track = paper so the thumb floats on the page) */
+    scrollbar-width: thin;
+    scrollbar-color: #a29c92 var(--paper);
+}
+
+/* sleek custom scrollbar (WebKit / Chromium) — a slim inset capsule that
+   reads over both the light sections and the dark footer, always present
+   (not the OS overlay bar that fades in and out) */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    /* paper track blends with the page so only the floating thumb shows
+       (the black html background is kept for the bottom overscroll) */
+    background: var(--paper);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a29c92;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: 999px;
+    transition: background 0.3s var(--ease);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #7d766a;
 }
 
 body {
