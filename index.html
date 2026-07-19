@@ -90,10 +90,11 @@
     ============================================================= -->
     <div class="menu" id="menu" aria-hidden="true">
         <nav class="menu__nav" aria-label="Primary">
-            <a href="#top">Home</a>
-            <a href="#work">Work</a>
-            <a href="#practice">Practice</a>
-            <a href="#contact">Contact</a>
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="index.html#work">Work</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
         </nav>
         <div class="menu__meta">
             <div>
@@ -284,82 +285,7 @@
         </div>
     </footer>
 
-    <script>
-        (function () {
-            // Inject the logo-only mark into [data-mark] slots (intro + footer)
-            var tpl = document.getElementById('mark');
-            document.querySelectorAll('[data-mark]').forEach(function (slot) {
-                slot.appendChild(tpl.content.cloneNode(true));
-            });
-            document.getElementById('year').textContent = new Date().getFullYear();
-
-            // ---- Intro: start the sequence only once fonts are ready, so the
-            //      logo mark and the wordmark fade in at the same instant ----
-            var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (motionOK) {
-                document.body.classList.add('intro-lock');
-                var started = false;
-                var startIntro = function () {
-                    if (started) return;
-                    started = true;
-                    document.body.classList.add('intro-ready');
-                    window.setTimeout(function () {
-                        document.body.classList.remove('intro-lock');
-                        var intro = document.getElementById('intro');
-                        if (intro) intro.remove();
-                    }, 5600);
-                };
-                if (document.fonts && document.fonts.ready) {
-                    document.fonts.ready.then(startIntro);
-                    window.setTimeout(startIntro, 1200); // fallback if fonts stall
-                } else {
-                    startIntro();
-                }
-            }
-
-            // ---- Menu toggle: logo <-> hamburger <-> X ----
-            var toggle = document.getElementById('brandToggle');
-            var menu = document.getElementById('menu');
-            function setMenu(open) {
-                toggle.classList.toggle('is-open', open);
-                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-                toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-                menu.classList.toggle('is-open', open);
-                menu.setAttribute('aria-hidden', open ? 'false' : 'true');
-                document.body.classList.toggle('menu-open', open);
-            }
-            toggle.addEventListener('click', function () {
-                setMenu(!toggle.classList.contains('is-open'));
-            });
-            menu.querySelectorAll('a').forEach(function (a) {
-                a.addEventListener('click', function () { setMenu(false); });
-            });
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape') setMenu(false);
-            });
-
-            // ---- Scroll reveal (+ staggered children) ----
-            var revealEls = document.querySelectorAll('.reveal, [data-stagger]');
-            if ('IntersectionObserver' in window) {
-                var io = new IntersectionObserver(function (entries) {
-                    entries.forEach(function (e) {
-                        if (!e.isIntersecting) return;
-                        var el = e.target;
-                        if (el.hasAttribute('data-stagger')) {
-                            [].forEach.call(el.children, function (child, i) {
-                                child.style.transitionDelay = (i * 70) + 'ms';
-                            });
-                        }
-                        el.classList.add('is-visible');
-                        io.unobserve(el);
-                    });
-                }, { threshold: 0.12 });
-                revealEls.forEach(function (el) { io.observe(el); });
-            } else {
-                revealEls.forEach(function (el) { el.classList.add('is-visible'); });
-            }
-        })();
-    </script>
+    <script src="site.js"></script>
 
 </body>
 
