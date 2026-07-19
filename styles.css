@@ -33,6 +33,9 @@ html {
     scroll-padding-top: var(--header-h);
     /* the footer's dark colour fills any overscroll past the bottom (no white gap) */
     background: var(--ink);
+    /* always reserve the scrollbar's width so nothing shifts sideways when it
+       appears after the intro (or on any lock/unlock of scrolling) */
+    scrollbar-gutter: stable;
 }
 
 body {
