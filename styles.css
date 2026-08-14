@@ -1403,15 +1403,34 @@ section {
     color: var(--ink-soft);
 }
 
-.founder {
-    /* gray rule under the founder quote (matches the page-lead intro rule) */
-    border-bottom: 1px solid var(--line);
+/* Content-width gray rule between sections — same width and the same space
+   above/below as the page-lead intro rule. The rule owns the whole gap: the
+   section before it gets its bottom padding zeroed and the section after it its
+   top padding, so every rule sits in identical space. */
+.about-rule {
+    border: 0;
+    border-top: 1px solid var(--line);
+    width: min(var(--max), calc(100% - 2 * var(--pad)));
+    margin: clamp(2rem, 5vh, 3.5rem) auto clamp(3rem, 6vh, 4.5rem);
 }
 
-/* gray rule under a section, like the one under the page-lead intro */
-.split--ruled {
-    border-bottom: 1px solid var(--line);
-    padding-bottom: clamp(3rem, 7vh, 5rem);
+section:has(+ .about-rule) {
+    padding-bottom: 0;
+}
+
+.about-rule + section {
+    padding-top: 0;
+}
+
+/* drop the last prose line's trailing margin so the rule's own margin sets the
+   space above it */
+.prose > :last-child {
+    margin-bottom: 0;
+}
+
+/* tighten the gap between the last About section and the footer */
+#leandre {
+    padding-bottom: clamp(1.5rem, 4vh, 3rem);
 }
 
 /* --- Split (label + prose) --- */
