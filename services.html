@@ -4,25 +4,29 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Services — TAKAMI Engineering Group, Inc.</title>
+    <title>Services · TAKAMI Engineering Group, Inc.</title>
     <meta name="description"
-        content="Design, engineering coordination, permit expediting and project management — TAKAMI guides Bay Area projects from concept through permit approval and construction." />
+        content="Design, engineering coordination, permit expediting and project management. TAKAMI guides Bay Area projects from concept through permit approval and construction." />
     <meta name="theme-color" content="#141414" />
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
+    <!-- Preload the process-section tower image so it's ready on arrival, not
+         fetched late when the section scrolls into view -->
+    <link rel="preload" as="image" href="golden_gate2.avif" type="image/avif" />
+
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="TAKAMI Engineering Group, Inc." />
-    <meta property="og:title" content="Services — TAKAMI Engineering Group, Inc." />
+    <meta property="og:title" content="Services · TAKAMI Engineering Group, Inc." />
     <meta property="og:description"
-        content="From concept to permit to construction — design, engineering coordination, permit expediting and project management across the San Francisco Bay Area." />
+        content="From concept to permit to construction: design, engineering coordination, permit expediting and project management across the San Francisco Bay Area." />
     <meta property="og:url" content="https://takamigroup.com/services.html" />
     <meta name="twitter:card" content="summary" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=71">
 </head>
 
 <body>
@@ -44,8 +48,7 @@
     <!-- NAV -->
     <header class="nav" id="top">
         <div class="nav__inner">
-            <button class="brand" id="brandToggle" type="button" aria-label="Open menu" aria-expanded="false"
-                aria-controls="menu">
+            <a class="brand" href="index.html" aria-label="TAKAMI, home">
                 <span class="brand__mark">
                     <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
                         <g class="m-logo" fill="none" stroke="currentColor" stroke-width="2"
@@ -59,40 +62,21 @@
                             <line x1="50" y1="68" x2="50" y2="94" />
                         </g>
                     </svg>
-                    <span class="brand__bars" aria-hidden="true"><i></i><i></i><i></i></span>
                 </span>
                 <span class="brand__word">TAKAMI</span>
+            </a>
+            <button class="nav__toggle" id="navToggle" type="button" aria-label="Menu"
+                aria-expanded="false" aria-controls="navLinks">
+                <span></span><span></span><span></span>
             </button>
+            <nav class="nav__links" id="navLinks" aria-label="Primary">
+                <a href="services.html" aria-current="page">Services</a>
+                <a href="work.html">Work</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
         </div>
     </header>
-
-    <!-- MENU -->
-    <div class="menu" id="menu" aria-hidden="true">
-        <nav class="menu__nav" aria-label="Primary">
-            <a href="index.html">Home</a>
-            <a href="services.html" aria-current="page">Services</a>
-            <a href="index.html#work">Work</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-        <div class="menu__meta">
-            <div>
-                <h3>Office</h3>
-                <p>1041A Folger Ave.<br>Berkeley, CA 94710</p>
-            </div>
-            <div>
-                <h3>Contact</h3>
-                <p>
-                    <a href="tel:+15105490440">510.549.0440</a><br>
-                    <a href="mailto:takamigroup@gmail.com">takamigroup@gmail.com</a>
-                </p>
-            </div>
-            <div>
-                <h3>Hours</h3>
-                <p>Monday – Friday<br>8:00 AM – 5:00 PM</p>
-            </div>
-        </div>
-    </div>
 
     <main>
 
@@ -100,92 +84,169 @@
             <p class="eyebrow">What we do</p>
             <h1 class="page-title">From concept to <em>permit</em> to construction.</h1>
             <p class="page-lead">
-                More than plans. We guide homeowners, businesses and developers through
-                every stage of the process — and we know how to move projects through
-                the Bay Area's most demanding jurisdictions.
+                We do more than plan. We guide homeowners, businesses and developers through
+                every stage of the process, bringing years of expertise moving projects through
+                the Bay's most demanding jurisdictions.
             </p>
             <hr class="hero__rule">
         </section>
 
+        <!-- Services: two strands that unwind around the statement (DNA-style) -->
+        <section class="reveal svc-section">
+            <div class="section-head">
+                <h2>Our Services</h2>
+            </div>
+
+            <!-- Accessible summary (the visual below is decorative for AT) -->
+            <p class="svc-sr">If you can think it, we can help. Reach out with your plans and we
+                will find out where we fit in. We offer architectural design and construction
+                documents, structural coordination, permit expediting and agency coordination,
+                project management and owner representation, residential and commercial
+                renovations, foundation repairs and seismic upgrades, additions, ADUs and garage
+                conversions, and building code analysis and regulatory compliance.</p>
+
+            <!-- Wide-screen orbit -->
+            <svg class="svc-orbit" data-orbit viewBox="0 0 1000 500" aria-hidden="true"
+                focusable="false" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                    <path id="svcTop"
+                        d="M 0,232 L 175,232 C 265,232 305,215 341,155 A 185,185 0 0 1 659,155 C 695,215 735,232 825,232 L 1000,232" />
+                    <path id="svcBot"
+                        d="M 0,268 L 175,268 C 265,268 305,285 341,345 A 185,185 0 0 0 659,345 C 695,285 735,268 825,268 L 1000,268" />
+                </defs>
+
+                <!-- top strand (two identical copies → JS scrolls it seamlessly) -->
+                <text class="svc-orbit__strand svc-orbit__strand--top" font-size="21">
+                    <textPath href="#svcTop" data-strand="top" startOffset="0">Architectural Design &amp; Construction Documents&#160;&#160;&#9671;&#160;&#160;Permit Expediting &amp; Agency Coordination&#160;&#160;&#9671;&#160;&#160;Foundation Repairs &amp; Seismic Upgrades&#160;&#160;&#9671;&#160;&#160;Additions, ADUs &amp; Garage Conversions&#160;&#160;&#9671;&#160;&#160;Architectural Design &amp; Construction Documents&#160;&#160;&#9671;&#160;&#160;Permit Expediting &amp; Agency Coordination&#160;&#160;&#9671;&#160;&#160;Foundation Repairs &amp; Seismic Upgrades&#160;&#160;&#9671;&#160;&#160;Additions, ADUs &amp; Garage Conversions&#160;&#160;&#9671;&#160;&#160;</textPath>
+                </text>
+
+                <!-- bottom strand -->
+                <text class="svc-orbit__strand svc-orbit__strand--bot" font-size="21">
+                    <textPath href="#svcBot" data-strand="bot" startOffset="0">Structural Coordination&#160;&#160;&#9671;&#160;&#160;Project Management &amp; Owner Representation&#160;&#160;&#9671;&#160;&#160;Residential &amp; Commercial Renovations&#160;&#160;&#9671;&#160;&#160;Building Code Analysis &amp; Regulatory Compliance&#160;&#160;&#9671;&#160;&#160;Structural Coordination&#160;&#160;&#9671;&#160;&#160;Project Management &amp; Owner Representation&#160;&#160;&#9671;&#160;&#160;Residential &amp; Commercial Renovations&#160;&#160;&#9671;&#160;&#160;Building Code Analysis &amp; Regulatory Compliance&#160;&#160;&#9671;&#160;&#160;</textPath>
+                </text>
+
+                <!-- statement: one text box, JS centres it vertically in the ring -->
+                <text class="svc-orbit__statement" text-anchor="middle">
+                    <tspan x="500" y="179" font-size="28">If you can think it,</tspan>
+                    <tspan class="svc-orbit__em" x="500" y="215" font-size="28">we can help.</tspan>
+                    <tspan class="svc-orbit__soft" x="500" y="265" font-size="17">Reach out with your plans</tspan>
+                    <tspan class="svc-orbit__soft" x="500" y="293" font-size="17">and we will find out where</tspan>
+                    <tspan class="svc-orbit__soft" x="500" y="321" font-size="17">we fit in.</tspan>
+                </text>
+            </svg>
+
+            <!-- Narrow-screen fallback: statement between two simple drifting rows -->
+            <div class="svc-fallback" aria-hidden="true">
+                <div class="svc-marquee">
+                    <div class="svc-row">
+                        <div class="svc-track">
+                            <span class="svc-item">Architectural Design &amp; Construction Documents</span>
+                            <span class="svc-item">Permit Expediting &amp; Agency Coordination</span>
+                            <span class="svc-item">Foundation Repairs &amp; Seismic Upgrades</span>
+                            <span class="svc-item">Additions, ADUs &amp; Garage Conversions</span>
+                        </div>
+                        <div class="svc-track" aria-hidden="true">
+                            <span class="svc-item">Architectural Design &amp; Construction Documents</span>
+                            <span class="svc-item">Permit Expediting &amp; Agency Coordination</span>
+                            <span class="svc-item">Foundation Repairs &amp; Seismic Upgrades</span>
+                            <span class="svc-item">Additions, ADUs &amp; Garage Conversions</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="svc-fallback__statement">If you can think it, <em>we can help.</em><br>
+                    Reach out with your plans and we will find out where we fit in.</p>
+
+                <div class="svc-marquee">
+                    <div class="svc-row svc-row--rev">
+                        <div class="svc-track">
+                            <span class="svc-item">Structural Coordination</span>
+                            <span class="svc-item">Project Management &amp; Owner Representation</span>
+                            <span class="svc-item">Residential &amp; Commercial Renovations</span>
+                            <span class="svc-item">Building Code Analysis &amp; Regulatory Compliance</span>
+                        </div>
+                        <div class="svc-track" aria-hidden="true">
+                            <span class="svc-item">Structural Coordination</span>
+                            <span class="svc-item">Project Management &amp; Owner Representation</span>
+                            <span class="svc-item">Residential &amp; Commercial Renovations</span>
+                            <span class="svc-item">Building Code Analysis &amp; Regulatory Compliance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Process -->
-        <section class="reveal">
+        <section class="reveal process-band">
             <div class="section-head">
-                <h2>How we work</h2>
-                <span class="section-index">The process</span>
+                <h2>Our Process</h2>
             </div>
-            <div class="process" data-stagger>
-                <div class="process__step">
-                    <span class="process__no">01</span>
-                    <div>
-                        <h3 class="process__title">Concept &amp; Design</h3>
-                        <p class="process__desc">Architectural design and construction documents that
-                            translate your vision into a clear, buildable set.</p>
-                    </div>
+            <div class="journey" data-journey>
+                <div class="journey__spine" aria-hidden="true">
+                    <span class="journey__line"></span>
                 </div>
-                <div class="process__step">
-                    <span class="process__no">02</span>
-                    <div>
-                        <h3 class="process__title">Engineering Coordination</h3>
-                        <p class="process__desc">Structural coordination with engineers, consultants and
-                            contractors so every discipline aligns before it reaches the city.</p>
-                    </div>
-                </div>
-                <div class="process__step">
-                    <span class="process__no">03</span>
-                    <div>
-                        <h3 class="process__title">Permitting</h3>
-                        <p class="process__desc">Permit expediting and agency coordination — responding to
-                            plan-check comments and moving approvals forward.</p>
-                    </div>
-                </div>
-                <div class="process__step">
-                    <span class="process__no">04</span>
-                    <div>
-                        <h3 class="process__title">Construction Support</h3>
-                        <p class="process__desc">Project management and owner representation through
-                            construction, inspections and close-out.</p>
-                    </div>
-                </div>
+                <ol class="journey__steps">
+                    <li class="journey__step">
+                        <span class="journey__marker"><span class="journey__no">01</span></span>
+                        <div class="journey__body">
+                            <h3 class="journey__title">Concept &amp; Design</h3>
+                            <p class="journey__desc">Architectural design and construction documents that translate
+                                your vision into a clear, coordinated buildable set.</p>
+                        </div>
+                    </li>
+                    <li class="journey__step">
+                        <span class="journey__marker"><span class="journey__no">02</span></span>
+                        <div class="journey__body">
+                            <h3 class="journey__title">Build Coordination</h3>
+                            <p class="journey__desc">Structural coordination with engineers, consultants and contractors
+                                so every discipline aligns before the city submittal.</p>
+                        </div>
+                    </li>
+                    <li class="journey__step">
+                        <span class="journey__marker"><span class="journey__no">03</span></span>
+                        <div class="journey__body">
+                            <h3 class="journey__title">Permitting</h3>
+                            <p class="journey__desc">Permit expediting and agency coordination, responding to
+                                plan-check comments and keeping approvals moving forward.</p>
+                        </div>
+                    </li>
+                    <li class="journey__step">
+                        <span class="journey__marker"><span class="journey__no">04</span></span>
+                        <div class="journey__body">
+                            <h3 class="journey__title">Construction Support</h3>
+                            <p class="journey__desc">Hands-on project management and owner representation through
+                                construction, inspections and final project closeout.</p>
+                        </div>
+                    </li>
+                </ol>
             </div>
         </section>
 
-        <!-- Services list -->
-        <section class="reveal">
-            <div class="section-head">
-                <h2>Services</h2>
-                <span class="section-index">Full scope</span>
+        <!-- Differentiator -->
+        <section class="reveal difference">
+            <div class="difference__content" data-difference>
+                <div class="section-head">
+                    <h2>Our difference</h2>
+                </div>
+                <p class="lead-statement">We know how to get it <em>permitted</em>.</p>
+                <p class="lead-copy">
+                    Many firms can draw plans. Far fewer can carry a project from the first
+                    sketch through permit approval, coordinating consultants, responding to
+                    plan-check comments and supporting construction. We understand how to work
+                    with the cities that shape the Bay Area.
+                </p>
+                <ul class="jurisdictions">
+                    <li>San Francisco</li>
+                    <li>Oakland</li>
+                    <li>Berkeley</li>
+                    <li>&amp; Bay Area jurisdictions</li>
+                </ul>
             </div>
-            <ul class="capabilities" data-stagger>
-                <li>Architectural Design &amp; Construction Documents</li>
-                <li>Structural Coordination</li>
-                <li>Permit Expediting &amp; Agency Coordination</li>
-                <li>Project Management &amp; Owner Representation</li>
-                <li>Building Code Analysis &amp; Regulatory Compliance</li>
-                <li>Residential &amp; Commercial Renovations</li>
-                <li>Foundation Repairs &amp; Seismic Upgrades</li>
-                <li>Additions, ADUs &amp; Garage Conversions</li>
-                <li class="capabilities__wide">Coordination with engineers, consultants &amp; contractors
-                    through permit issuance</li>
-            </ul>
+            <!-- Bay Area map: ghosted ink-on-paper (multiply blend), with a
+                 pointer-tracked spotlight that sharpens the map under the cursor -->
+            <div class="difference__map" data-map role="img"
+                aria-label="Map of the San Francisco Bay Area, the region TAKAMI serves"></div>
         </section>
-
-        <!-- Differentiator band -->
-        <div class="band reveal">
-            <p class="band__eyebrow">Our difference</p>
-            <h2 class="band__title">We know how to get it <em>permitted</em>.</h2>
-            <p class="band__text">
-                Many firms can draw plans. Far fewer can carry a project from the first
-                sketch through permit approval — coordinating consultants, responding to
-                plan-check comments, and supporting construction. We understand how to work
-                with the cities that shape the Bay Area.
-            </p>
-            <ul class="jurisdictions">
-                <li>San Francisco</li>
-                <li>Oakland</li>
-                <li>Berkeley</li>
-                <li>&amp; Bay Area jurisdictions</li>
-            </ul>
-        </div>
 
     </main>
 
@@ -202,7 +263,7 @@
         <div class="footer__grid">
             <div>
                 <h3>Office</h3>
-                <p>1041A Folger Ave.<br>Berkeley, CA 94710</p>
+                <p><a class="map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=1041A%20Folger%20Ave%2C%20Berkeley%2C%20CA%2094710" target="_blank" rel="noopener">1041A Folger Ave.<br>Berkeley, CA 94710</a></p>
             </div>
             <div>
                 <h3>Contact</h3>
@@ -223,7 +284,7 @@
         </div>
     </footer>
 
-    <script src="site.js"></script>
+    <script src="site.js?v=71"></script>
 
 </body>
 

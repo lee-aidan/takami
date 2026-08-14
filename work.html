@@ -4,22 +4,20 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TAKAMI Engineering Group, Inc.</title>
+    <title>Work · TAKAMI Engineering Group, Inc.</title>
     <meta name="description"
-        content="TAKAMI Engineering Group provides structural engineering, design management and building permits for residential and commercial projects across the San Francisco Bay Area." />
+        content="Selected work from TAKAMI Engineering Group: residential, commercial and hospitality projects permitted and delivered across the San Francisco Bay Area." />
     <meta name="theme-color" content="#141414" />
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
-    <!-- Social / link sharing -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="TAKAMI Engineering Group, Inc." />
-    <meta property="og:title" content="TAKAMI Engineering Group, Inc." />
+    <meta property="og:title" content="Work · TAKAMI Engineering Group, Inc." />
     <meta property="og:description"
-        content="Structural engineering, design management and building permits for residential and commercial projects across the San Francisco Bay Area." />
-    <meta property="og:url" content="https://takamigroup.com/" />
+        content="A selection of residential, commercial and hospitality projects delivered across the San Francisco Bay Area." />
+    <meta property="og:url" content="https://takamigroup.com/work.html" />
     <meta name="twitter:card" content="summary" />
-    <!-- TODO: add og:image (1200×630) once project photography is available -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,9 +25,8 @@
     <link rel="stylesheet" href="styles.css?v=71">
 </head>
 
-<body class="home">
+<body>
 
-    <!-- Reusable logo mark (logo-only) for the intro + footer -->
     <template id="mark">
         <svg class="mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
             <g fill="none" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke">
@@ -44,22 +41,7 @@
         </svg>
     </template>
 
-    <!-- ============================================================
-         INTRO: black screen, white mark, folds into the corner
-         (CSS-driven; auto-skipped under prefers-reduced-motion)
-    ============================================================= -->
-    <div id="intro" aria-hidden="true">
-        <div class="intro__veil"></div>
-        <span class="intro__mark" data-mark></span>
-        <div class="intro__words">
-            <span class="intro__title">TAKAMI</span>
-            <span class="intro__sub">ENGINEERING GROUP, INC.</span>
-        </div>
-    </div>
-
-    <!-- ============================================================
-         NAV: light header with visible page links
-    ============================================================= -->
+    <!-- NAV -->
     <header class="nav" id="top">
         <div class="nav__inner">
             <a class="brand" href="index.html" aria-label="TAKAMI, home">
@@ -85,7 +67,7 @@
             </button>
             <nav class="nav__links" id="navLinks" aria-label="Primary">
                 <a href="services.html">Services</a>
-                <a href="work.html">Work</a>
+                <a href="work.html" aria-current="page">Work</a>
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
             </nav>
@@ -94,55 +76,52 @@
 
     <main>
 
-        <!-- Hero -->
-        <section class="hero reveal">
-            <p class="eyebrow">San Francisco Bay Area · Est. 1998</p>
-            <div class="hero__lines">
-                <h1 class="hero__statement">
-                    Structural engineering that<br>
-                    finds the balance between<br>
-                    <span class="nowrap"><em>art</em> and <em>function</em>.</span>
-                </h1>
-                <p class="hero__sub">
-                    Design · Engineering Coordination · Permit Expediting · Project Management
-                </p>
-            </div>
+        <section class="page-head reveal">
+            <p class="eyebrow">Selected Work</p>
+            <h1 class="page-title">Projects across the <em>Bay Area</em>.</h1>
+            <p class="page-lead">
+                A selection of residential, commercial and hospitality projects we've
+                designed, coordinated, and permitted, from concept to completion.
+            </p>
             <hr class="hero__rule">
         </section>
 
-        <!-- Intro copy -->
-        <section class="intro-copy reveal">
-            <div class="intro-copy__text">
-                <p class="intro-copy__lead">
-                    At Takami, we manage every project from inception to completion, across
-                    residential, light-commercial, mixed-use and hospitality work. We
-                    partner with all awarded trades to ease the client's task of
-                    coordination, procurement and inspection. Let's work together to get your 
-                    project done.
-                </p>
-                <p class="intro-copy__more">
-                    To learn more about our mission, <a href="about.html">click here</a>.
-                </p>
+        <section class="work reveal">
+            <div class="slideshow" data-slideshow>
+                <div class="slideshow__stage">
+                    <span class="slide is-active" data-label="Commercial"
+                        data-name="American Industrial Center" data-place="San Francisco, CA"></span>
+                    <span class="slide" data-label="Hospitality" data-name="Mason + Pacific Restaurant"
+                        data-place="San Francisco, CA"></span>
+                    <span class="slide" data-label="Commercial Kitchen" data-name="Foxtail Catering &amp; Events"
+                        data-place="San Francisco, CA"></span>
+                    <span class="slide" data-label="Residential" data-name="1859 Pine Street"
+                        data-place="San Francisco, CA"></span>
+                    <span class="slide" data-label="Commercial" data-name="451 Jackson Street"
+                        data-place="San Francisco, CA"></span>
+                    <span class="slide" data-label="Residential" data-name="Hidden Valley Lake"
+                        data-place="Lake County, CA"></span>
+                </div>
+                <div class="slideshow__controls">
+                    <span class="slideshow__caption">
+                        <span class="slideshow__name" data-slide-name></span>
+                        <span class="slideshow__place" data-slide-place></span>
+                    </span>
+                    <span class="slideshow__nav">
+                        <span class="slideshow__counter" data-slideshow-counter>01 / 06</span>
+                        <button class="slideshow__btn" type="button" data-slide-prev
+                            aria-label="Previous project"><span aria-hidden="true">←</span></button>
+                        <button class="slideshow__btn" type="button" data-slide-next
+                            aria-label="Next project"><span aria-hidden="true">→</span></button>
+                    </span>
+                </div>
             </div>
-            <dl class="stats">
-                <div>
-                    <dt>300+</dt>
-                    <dd>Bay Area projects permitted</dd>
-                </div>
-                <div>
-                    <dt>75+</dt>
-                    <dd>Combined years in the field</dd>
-                </div>
-                <div>
-                    <dt>25+</dt>
-                    <dd>Years serving the Bay Area</dd>
-                </div>
-            </dl>
+            <p class="work__note">Project photography is being prepared; imagery is coming soon.</p>
         </section>
 
     </main>
 
-    <!-- Contact / footer -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer__cta reveal">
             <p class="footer__eyebrow">Start a project</p>
