@@ -2298,3 +2298,46 @@ section:has(+ .about-rule) {
     margin: 0 0.45rem;
     color: var(--line);
 }
+
+/* =====================================================================
+   MOBILE OPTIMIZATION — phone-width refinements (see MOBILE_OPTIMIZATION.md).
+   Desktop is untouched; everything here is gated to phone widths.
+   ===================================================================== */
+@media (max-width: 640px) {
+    /* G1 — left-align body copy so justification stops opening word-gap rivers */
+    .page-lead,
+    .journey__desc {
+        text-align: left;
+        text-justify: auto;
+    }
+
+    /* H2 — drop the desktop <br>s and let the hero statement flow naturally */
+    .hero__statement br {
+        display: none;
+    }
+
+    .hero__lines {
+        width: 100%;
+    }
+
+    /* H1 — the sub-line reads as normal running text instead of a justified row
+       that scatters the middle dots across two columns */
+    .hero__sub {
+        margin-top: 1.75rem;
+        text-align: left;
+        text-align-last: auto;
+        letter-spacing: 0.12em;
+        line-height: 1.7;
+    }
+
+    /* S2 — the Bay Area map has no hover spotlight on touch, so shrink it (it
+       ate a whole screen as a faint ghost) and lift the base opacity so it
+       reads as a deliberate small graphic */
+    .difference__map {
+        max-width: 15rem;
+    }
+
+    .difference__map::before {
+        opacity: 0.4;
+    }
+}

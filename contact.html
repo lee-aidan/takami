@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=74">
+    <link rel="stylesheet" href="styles.css?v=77">
 </head>
 
 <body>
@@ -102,8 +102,10 @@
                     </div>
                     <div class="form__row">
                         <div class="field">
-                            <label for="f-phone">Phone <span class="field__opt">(optional)</span></label>
-                            <input id="f-phone" name="phone" type="tel" autocomplete="tel">
+                            <label for="f-phone">Phone</label>
+                            <input id="f-phone" name="phone" type="tel" inputmode="numeric"
+                                autocomplete="tel" placeholder="+1 555-123-4567"
+                                pattern="\+1 \d{3}-\d{3}-\d{4}" required data-phone>
                         </div>
                         <div class="field">
                             <label for="f-type">Project type</label>
@@ -171,7 +173,7 @@
         </div>
     </footer>
 
-    <script src="site.js?v=74"></script>
+    <script src="site.js?v=77"></script>
 
 </body>
 

@@ -582,6 +582,53 @@
         fitAbout();
     }
 
+    // ---- Contact: live-format the phone field as "+1 555-123-4567" ----
+    // Robust to typing, backspace, paste, and mid-string edits: on every input
+    // we reduce the field to its user digits, rebuild the mask, and restore the
+    // caret to the same digit position (discounting the fixed "+1" prefix).
+    var phoneEl = document.querySelector('[data-phone]');
+    if (phoneEl) {
+        var userDigits = function (s) {
+            var d = s.replace(/\D/g, '');
+            if (/^\s*\+/.test(s)) d = d.replace(/^1/, '');   // our "+1" prefix
+            else if (d.length === 11 && d.charAt(0) === '1') d = d.slice(1); // pasted 1XXXXXXXXXX
+            return d.slice(0, 10);
+        };
+        var mask = function (d) {
+            if (!d) return '';
+            var out = '+1 ' + d.slice(0, 3);
+            if (d.length > 3) out += '-' + d.slice(3, 6);
+            if (d.length > 6) out += '-' + d.slice(6, 10);
+            return out;
+        };
+        var formatPhoneField = function () {
+            var el = phoneEl;
+            var val = el.value;
+            var caret = el.selectionStart == null ? val.length : el.selectionStart;
+            // user digits to the left of the caret (discount the "+1" prefix's 1)
+            var leftDigits = val.slice(0, caret).replace(/\D/g, '').length;
+            if (val.slice(0, 2) === '+1' && caret >= 2) leftDigits -= 1;
+            if (leftDigits < 0) leftDigits = 0;
+
+            var next = mask(userDigits(val));
+            if (next === val) return;
+            el.value = next;
+
+            if (document.activeElement !== el) return;
+            var pos = next.length, i = next.slice(0, 3) === '+1 ' ? 3 : 0, seen = 0;
+            if (leftDigits === 0) { pos = i; }
+            else {
+                for (; i < next.length; i++) {
+                    if (/\d/.test(next.charAt(i)) && ++seen === leftDigits) { pos = i + 1; break; }
+                }
+            }
+            try { el.setSelectionRange(pos, pos); } catch (e) { /* unsupported type */ }
+        };
+        phoneEl.addEventListener('input', formatPhoneField);
+        // paste lands its text first, then we reformat on the next tick
+        phoneEl.addEventListener('paste', function () { window.setTimeout(formatPhoneField, 0); });
+    }
+
     // ---- Contact form: front-end confirmation (backend wired later) ----
     // Native `required` validation blocks an invalid submit before this fires;
     // once a form service (Formspree / Netlify) is added, POST here first.
