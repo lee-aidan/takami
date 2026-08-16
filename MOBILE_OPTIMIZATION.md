@@ -62,9 +62,23 @@ below all of these, so most mobile CSS should live in a `@media (max-width: 640p
   On mobile: `.difference__map{max-width:15rem}` (smaller) + base `::before`
   opacity 0.26→0.4 so it reads as a deliberate small graphic. *(Verify the shrink
   looks right on a real device — preview can't paint the blend layer.)*
-- `[ ]` **S3 — Process/bridge on small screens** *(Low, verify on real device)*
-  `fitBridge` sizes the copy to the tower legs; renders OK at 375 but confirm the
-  1/3-on-dark-beam alignment and text fit at 320–360 on a real phone.
+- `[x]` **S3 — Process/bridge on phones** *(v81)* — real-device request: smaller
+  copy + the black scroll-bar spine + filled numbers, like desktop.
+  - `fitBridge` now bails ≤720px (the wide desktop tower geometry doesn't fit a
+    phone), resetting the journey to the centred CSS layout; drawJourney still
+    draws the spine + fills numbers on scroll.
+  - Mobile CSS (placed *after* the base `.journey` rules so it wins on source
+    order): `.journey__desc` → 0.8rem + left-aligned; spine/line → 2px.
+  - drawJourney `else` branch now also fills the spine to 100% under reduced
+    motion, so the "scroll bar" is present even then.
+  - Verified 12.8px desc + 2px spine + no overflow at 375/430.
+- `[x]` **S4 — Services orbit now shown on phones** *(v81)* — real-device request
+  ("the animated circle is not there"). The orbit is set 640px wide with equal
+  negative side margins so the ring + statement sit centre-screen and the side
+  strands run off the edges (clipped by `.svc-section { overflow-x: clip }` — the
+  fallback marquee is hidden). `alignPeak`/`balanceBottom` bail ≤720px so they
+  don't fight the centred layout; `centreStatement` still runs. Verified: ring
+  centred at both 375 and 430, statement centred, **no horizontal overflow**.
 
 ### Work (work.html)
 - `[x]` **W1 — Gap under slideshow** — reassessed as section+footer padding (see G3).
@@ -124,3 +138,4 @@ real bugs, just testing caveats:
   4 service phrases never split mid-phrase; a tuned hero image height on very
   short/tall phones; landscape spot-check.
 - 2026-08-16 — v78: fitLead bails on phones so About/Contact page-lead spans full width (was half-width from title-last-line pinning). Real-device pass confirmed earlier v76/77 fixes look good.
+- 2026-08-16 — v79-81: mobile Services now matches desktop — animated orbit shown (centred/overflow-clipped), and the process bridge gets smaller copy + a bolder drawn spine + filled numbers (fitBridge skipped on phones). No horizontal overflow at 375/430.

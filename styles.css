@@ -1303,12 +1303,26 @@ section {
 }
 
 @media (max-width: 720px) {
+    /* clip the orbit's side overflow to the section (html doesn't clip, so the
+       negative side margins would otherwise add horizontal scroll) */
+    .svc-section {
+        overflow-x: clip;
+    }
+
+    /* Show the animated orbit on phones too. It's wider than the viewport and
+       centred, so the ring + statement sit centre-screen while the side strands
+       run off the (clipped) edges and scroll in — same idea as desktop. */
     .svc-orbit {
-        display: none;
+        display: block;
+        width: 640px;
+        max-width: none;
+        /* equal negative side margins centre the 640px orbit and let it overflow
+           the (clipped) viewport symmetrically */
+        margin: clamp(1rem, 4vh, 2rem) calc(50% - 320px);
     }
 
     .svc-fallback {
-        display: block;
+        display: none;
     }
 }
 
@@ -2339,5 +2353,21 @@ section:has(+ .about-rule) {
 
     .difference__map::before {
         opacity: 0.4;
+    }
+}
+
+/* Process bridge on phones — placed after the base .journey rules so these win
+   on source order. Smaller copy + a slightly bolder drawn spine. */
+@media (max-width: 720px) {
+    .journey__desc {
+        font-size: 0.8rem;
+        text-align: left;
+        text-justify: auto;
+    }
+
+    .journey__line,
+    .journey__spine::before {
+        width: 2px;
+        margin-left: -1px;
     }
 }

@@ -292,7 +292,10 @@
             window.addEventListener('resize', drawJourney);
             drawJourney();
         } else {
+            // reduced motion (or no line): show the spine fully drawn + all numbers
+            // filled, so the "scroll bar" and dark markers are still present
             markers.forEach(function (m) { m.classList.add('is-reached'); });
+            if (line) line.style.height = '100%';
         }
 
         // ---- "Live in the bridge": size the copy to the tower legs and auto-fit
@@ -314,6 +317,17 @@
                 return m;
             };
             var fitBridge = function () {
+                // On phones the wide desktop tower geometry doesn't apply — don't
+                // track the legs. Reset to the CSS (centred) layout + a fixed small
+                // font (set in the mobile stylesheet); drawJourney still draws the spine.
+                if (window.matchMedia('(max-width: 720px)').matches) {
+                    journey.style.width = '';
+                    journey.style.maxWidth = '';
+                    journey.style.marginLeft = '';
+                    journey.style.marginRight = '';
+                    journey.style.removeProperty('--desc-fs');
+                    return;
+                }
                 var vw = window.innerWidth || document.documentElement.clientWidth;
                 var bh = band.offsetHeight;
                 var zoom = parseFloat(getComputedStyle(band).getPropertyValue('--tower-zoom')) || 1;
@@ -411,6 +425,9 @@
         // we use the PATH apex (reliable) minus the cap height as the real word top; a
         // Range gives the heading's glyph top. Self-correcting & idempotent.
         var alignPeak = function () {
+            // mobile: the orbit is centred/overflowing, not desktop-aligned to the
+            // heading — leave its margins to the stylesheet
+            if (window.matchMedia('(max-width: 720px)').matches) { orbit.style.marginTop = ''; return; }
             if (hidden || !heading || !topPath) return;
             var svgRect = orbit.getBoundingClientRect();
             if (!svgRect.height) return;
@@ -433,6 +450,7 @@
         // the process section's own height or the tower alignment. Runs after
         // alignPeak, so gapTop is already final. Self-correcting & idempotent.
         var balanceBottom = function () {
+            if (window.matchMedia('(max-width: 720px)').matches) { orbit.style.marginBottom = ''; return; }
             if (hidden || !topPath || !botPath || !rule || !proc) return;
             var svgRect = orbit.getBoundingClientRect();
             if (!svgRect.height) return;
