@@ -2318,11 +2318,13 @@ section:has(+ .about-rule) {
    Desktop is untouched; everything here is gated to phone widths.
    ===================================================================== */
 @media (max-width: 640px) {
-    /* G1 — left-align body copy so justification stops opening word-gap rivers */
-    .page-lead,
-    .journey__desc {
-        text-align: left;
-        text-justify: auto;
+    /* page-lead / subtext: justify so every page's subtext has a clean right
+       border out to the content edge (aligns with the menu button in the header).
+       Hyphenate so justification doesn't open big word-gap rivers on narrow screens. */
+    .page-lead {
+        text-align: justify;
+        text-justify: inter-word;
+        hyphens: auto;
     }
 
     /* H2 — drop the desktop <br>s and let the hero statement flow naturally */
@@ -2334,12 +2336,12 @@ section:has(+ .about-rule) {
         width: 100%;
     }
 
-    /* H1 — the sub-line reads as normal running text instead of a justified row
-       that scatters the middle dots across two columns */
+    /* H1 — justify the sub-line so each line fills the width (was a broken
+       justified two-column row on desktop; here it's a clean full-bleed label) */
     .hero__sub {
         margin-top: 1.75rem;
-        text-align: left;
-        text-align-last: auto;
+        text-align: justify;
+        text-align-last: justify;
         letter-spacing: 0.12em;
         line-height: 1.7;
     }
@@ -2359,9 +2361,10 @@ section:has(+ .about-rule) {
 /* Process bridge on phones — placed after the base .journey rules so these win
    on source order. Smaller copy + a slightly bolder drawn spine. */
 @media (max-width: 720px) {
+    /* centre the description under the (already-centred) title */
     .journey__desc {
         font-size: 0.8rem;
-        text-align: left;
+        text-align: center;
         text-justify: auto;
     }
 

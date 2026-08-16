@@ -373,7 +373,7 @@
     // re-laid-out), and the top of the arc is aligned to the heading's cap height.
     var orbit = document.querySelector('[data-orbit]');
     if (orbit) {
-        var SPEED = 16;                 // viewBox units per second
+        var SPEED = 26;                 // viewBox units per second (strand drift)
         var VB_H = 500;                 // viewBox height
         var RING_CY = 250;              // ring centre (viewBox units)
         var statement = orbit.querySelector('.svc-orbit__statement');
@@ -468,26 +468,28 @@
             return { tp: tp, period: 0, offset: 0, dir: tp.getAttribute('data-strand') === 'top' ? 1 : -1 };
         }) : [];
 
-        var last = 0;
-        var tick = function (now) {
-            var dt = last ? (now - last) / 1000 : 0;
-            last = now;
-            if (dt > 0.05) dt = 0.05;   // frame drop / tab resume → nudge, never lurch
-            if (!hidden) {
-                if (!centered) centreStatement();
-                for (var i = 0; i < strands.length; i++) {
-                    var s = strands[i];
-                    if (!s.period) {
-                        var L = s.tp.getComputedTextLength();
-                        if (!L) continue;   // display:none (mobile) → measures 0, retry later
-                        s.period = L / 2;
-                    }
-                    s.offset += s.dir * SPEED * dt;
-                    s.offset %= s.period;
-                    if (s.offset < 0) s.offset += s.period;
-                    s.tp.setAttribute('startOffset', (s.offset - s.period).toFixed(2));
-                }
-            }
+        // Strand scroll uses SMIL <animate> — reliable on iOS Safari, where
+        // animating startOffset via rAF + setAttribute changes the value but does
+        // NOT repaint the text-on-path (it looked frozen on phones). One <animate>
+        // per strand, looping over exactly one text-copy period so the seam never
+        // shows; top and bottom run in opposite directions.
+        var animateStrand = function (s) {
+            if (!s.period) return;
+            var prev = s.tp.querySelector('animate');
+            if (prev) prev.remove();
+            var a = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+            a.setAttribute('attributeName', 'startOffset');
+            a.setAttribute('values', s.dir === 1 ? (-s.period) + ';0' : '0;' + (-s.period));
+            a.setAttribute('dur', Math.max(1, s.period / SPEED).toFixed(1) + 's');
+            a.setAttribute('repeatCount', 'indefinite');
+            s.tp.appendChild(a);
+        };
+
+        // keep centring the statement until it lands (getBBox reads 0 before fonts
+        // load), then stop — the strands drive themselves via SMIL.
+        var tick = function () {
+            if (hidden || centered) return;
+            centreStatement();
             window.requestAnimationFrame(tick);
         };
 
@@ -510,10 +512,10 @@
                     var L = s.tp.getComputedTextLength();
                     if (L) s.period = L / 2;
                 }
-                if (s.period) s.tp.setAttribute('startOffset', (-s.period).toFixed(2));
+                animateStrand(s);
             }
             orbit.classList.add('is-ready');
-            if (motionOK) window.requestAnimationFrame(tick);
+            window.requestAnimationFrame(tick);
         };
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else start();
         window.setTimeout(start, 1500); // defensive: reveal even if fonts.ready stalls
@@ -523,12 +525,11 @@
         window.addEventListener('load', function () {
             for (var i = 0; i < strands.length; i++) {
                 var s = strands[i];
-                if (!s.period) continue;
                 var L = s.tp.getComputedTextLength();
-                if (L && Math.abs(L / 2 - s.period) > 0.5) {
-                    var frac = s.offset / s.period;
+                if (!L) continue;
+                if (!s.period || Math.abs(L / 2 - s.period) > 0.5) {
                     s.period = L / 2;
-                    s.offset = frac * s.period;
+                    animateStrand(s);   // (re)build the SMIL with the correct period
                 }
             }
             alignPeak();
