@@ -72,7 +72,13 @@ below all of these, so most mobile CSS should live in a `@media (max-width: 640p
 
 ### About (about.html)
 - `[x]` Stacks cleanly: label over prose, left-aligned, content-width dividers
-  carry over correctly. No action. (Spot-check founder portrait/quote — likely fine.)
+  carry over correctly.
+- `[x]` **A1/C1 — page-lead squished to half width on mobile** *(High)* — DONE (v78).
+  Real-device finding (About + Contact): `fitLead` pins the subtext's right edge
+  to the title's *last line*; when the title wraps short on a phone, the subtext
+  collapsed into a narrow left-hand column. → `fitLead` now bails on
+  `max-width:640px`, leaving the lead at `width:auto` (full content width).
+  Verified: About/Contact leads span the full 323px content width at 375.
 
 ### Contact (contact.html)
 - `[x]` Form stacks to one column, fields + phone placeholder + button all read
@@ -109,9 +115,12 @@ real bugs, just testing caveats:
   services at 375 and 338, no horizontal overflow. Not yet committed to git.
 
 ## Remaining / open
-- **G2** (nav bg) and **S3** (bridge at 320–360) need a real-device foreground
-  scroll to confirm — the backgrounded preview can't exercise `body.scrolled`,
-  rAF, or blend layers.
+- **G2** (nav bg) — CLOSED: real-device screenshots show the nav with the solid
+  paper background on scroll; no overlap. Also the bridge (S3) renders well at
+  ~390 with black/filled step numbers and left-aligned copy.
+- **Open question:** user note "scroll doesn't work as well as the animated word
+  lines" (services fallback marquee) — needs clarification on what feels off.
 - Consider (optional, not yet scoped): per-phrase `nowrap` on `.hero__sub` so the
   4 service phrases never split mid-phrase; a tuned hero image height on very
   short/tall phones; landscape spot-check.
+- 2026-08-16 — v78: fitLead bails on phones so About/Contact page-lead spans full width (was half-width from title-last-line pinning). Real-device pass confirmed earlier v76/77 fixes look good.

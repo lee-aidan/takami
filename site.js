@@ -83,6 +83,10 @@
         };
         var fitLead = function () {
             pageLead.style.width = 'auto';
+            // On phones the title wraps, so pinning the lead to the title's
+            // last-line width squishes it into a narrow half-width column. Let
+            // the lead (and title) run the full content width instead.
+            if (window.matchMedia('(max-width: 640px)').matches) return;
             var end = pageTitle.textContent.length;
             // drop a single trailing period and any trailing whitespace
             while (end > 0 && /[.\s]/.test(pageTitle.textContent.charAt(end - 1))) end--;
