@@ -305,7 +305,7 @@
         //      because the fitted copy changes the section height (and thus where
         //      the legs land), so it settles over a few frames. ----
         var band = journey.parentNode;
-        if (band && /(^|\s)process-band(\s|$)/.test(band.className || '') && motionOK) {
+        if (band && /(^|\s)process-band(\s|$)/.test(band.className || '')) {
             var descs = [].slice.call(journey.querySelectorAll('.journey__desc'));
             var rootRem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
             var maxLines = function () {
@@ -317,17 +317,6 @@
                 return m;
             };
             var fitBridge = function () {
-                // On phones the wide desktop tower geometry doesn't apply — don't
-                // track the legs. Reset to the CSS (centred) layout + a fixed small
-                // font (set in the mobile stylesheet); drawJourney still draws the spine.
-                if (window.matchMedia('(max-width: 720px)').matches) {
-                    journey.style.width = '';
-                    journey.style.maxWidth = '';
-                    journey.style.marginLeft = '';
-                    journey.style.marginRight = '';
-                    journey.style.removeProperty('--desc-fs');
-                    return;
-                }
                 var vw = window.innerWidth || document.documentElement.clientWidth;
                 var bh = band.offsetHeight;
                 var zoom = parseFloat(getComputedStyle(band).getPropertyValue('--tower-zoom')) || 1;
@@ -335,7 +324,10 @@
                 var centre = vw / 2;                  // image + copy share the viewport centre
                 var legLeft = centre - 0.075 * imgW;   // spine rail on the left tower leg
                 var legRight = centre + 0.062 * imgW;  // right border on the dark right-leg edge
-                var spineOff = 1.625 * rootRem;       // spine rail sits 1.625rem in from journey-left
+                // spine line sits at the centre of the marker rail — measure it so the
+                // smaller mobile markers (2.4rem) line up as cleanly as the desktop ones.
+                var spineEl = journey.querySelector('.journey__spine');
+                var spineOff = spineEl ? spineEl.getBoundingClientRect().width / 2 : 1.625 * rootRem;
                 var padL = parseFloat(getComputedStyle(band).paddingLeft) || 0;
                 var contentLeft = band.getBoundingClientRect().left + padL;
                 var jLeft = legLeft - spineOff;

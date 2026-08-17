@@ -2366,10 +2366,10 @@ section:has(+ .about-rule) {
 /* Process bridge on phones — placed after the base .journey rules so these win
    on source order. Smaller copy + a slightly bolder drawn spine. */
 @media (max-width: 720px) {
-    /* zoom the tower back so its legs bracket the narrower phone copy
-       (starting value — fine-tune on device) */
+    /* zoom sets how far apart fitBridge places the leg borders, i.e. the copy
+       column width; tuned so the descriptions fill ~3 lines between the legs */
     .process-band {
-        --tower-zoom: 1.2;
+        --tower-zoom: 1.7;
     }
 
     /* smaller number circles + rail + a thinner drawn spine → more room for copy,
@@ -2398,9 +2398,10 @@ section:has(+ .about-rule) {
     }
 
     /* descriptions justified to the copy edges (matches the desktop leg borders);
-       smaller + hyphenated so the narrow column doesn't open rivers */
+       hyphenated so the narrow between-the-legs column doesn't open rivers.
+       font-size is left to fitBridge's auto-fit (--desc-fs) so the copy fills the
+       leg-bounded column at 3 lines, exactly like the desktop version. */
     .journey__desc {
-        font-size: 0.8rem;
         text-align: justify;
         text-justify: inter-word;
         hyphens: auto;
