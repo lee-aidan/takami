@@ -412,6 +412,24 @@
         var ascent = function () { measureType(); return ascVb; };
         var descent = function () { measureType(); return descVb; };
 
+        // min/max y of a path in viewBox units, sampled along its length. The
+        // strand paths live in <defs>, and Firefox returns an empty box for
+        // getBBox() on unrendered/<defs> geometry (Chrome/Safari return the real
+        // box) — which made balanceBottom compute a huge negative margin and pull
+        // the process section up over the orbit. getPointAtLength is pure geometry
+        // and works on <defs> paths in every browser, matching getBBox where it works.
+        var pathY = function (path) {
+            var len; try { len = path.getTotalLength(); } catch (e) { return null; }
+            if (!len) return null;
+            var min = Infinity, max = -Infinity;
+            for (var i = 0; i <= 120; i++) {
+                var p = path.getPointAtLength(len * i / 120);
+                if (p.y < min) min = p.y;
+                if (p.y > max) max = p.y;
+            }
+            return { min: min, max: max };
+        };
+
         // align the highest point of the top word-line with the cap-top of the
         // "Our Services" label. getBBox on text-on-path reports the pre-curve box, so
         // we use the PATH apex (reliable) minus the cap height as the real word top; a
@@ -424,8 +442,8 @@
             var svgRect = orbit.getBoundingClientRect();
             if (!svgRect.height) return;
             var scale = svgRect.height / VB_H;
-            var apexVb; try { apexVb = topPath.getBBox().y; } catch (e) { return; }
-            var wordTopScreen = svgRect.top + (apexVb - ascent()) * scale;
+            var tY = pathY(topPath); if (!tY) return;
+            var wordTopScreen = svgRect.top + (tY.min - ascent()) * scale;
             var capTop;
             try {
                 var r = document.createRange();
@@ -447,10 +465,11 @@
             var svgRect = orbit.getBoundingClientRect();
             if (!svgRect.height) return;
             var scale = svgRect.height / VB_H;
-            var topWordY = svgRect.top + (topPath.getBBox().y - ascent()) * scale;
+            var tY = pathY(topPath), bY = pathY(botPath);
+            if (!tY || !bY) return;
+            var topWordY = svgRect.top + (tY.min - ascent()) * scale;
             var gapTop = topWordY - rule.getBoundingClientRect().top;
-            var bb = botPath.getBBox();
-            var botWordY = svgRect.top + (bb.y + bb.height + descent()) * scale;
+            var botWordY = svgRect.top + (bY.max + descent()) * scale;
             var gapBottom = proc.getBoundingClientRect().top - botWordY;
             var cur = parseFloat(window.getComputedStyle(orbit).marginBottom) || 0;
             orbit.style.marginBottom = (cur + (gapTop - gapBottom)).toFixed(1) + 'px';
