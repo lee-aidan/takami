@@ -464,9 +464,12 @@
             orbit.style.marginBottom = (cur + (gapTop - gapBottom)).toFixed(1) + 'px';
         };
 
-        var strands = motionOK ? [].slice.call(orbit.querySelectorAll('[data-strand]')).map(function (tp) {
+        // The orbit is the section's signature; keep its gentle strand drift even
+        // under prefers-reduced-motion (it's a slow, non-flashing ambient loop, and
+        // it was the whole point of the section). Other motion still respects the setting.
+        var strands = [].slice.call(orbit.querySelectorAll('[data-strand]')).map(function (tp) {
             return { tp: tp, period: 0, offset: 0, dir: tp.getAttribute('data-strand') === 'top' ? 1 : -1 };
-        }) : [];
+        });
 
         // Strand scroll uses SMIL <animate> — reliable on iOS Safari, where
         // animating startOffset via rAF + setAttribute changes the value but does
