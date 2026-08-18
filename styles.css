@@ -2370,6 +2370,27 @@ section:has(+ .about-rule) {
         font-size: 0.66rem;
     }
 
+    /* Centre the whole home page on phones (hero eyebrow/headline/sub, the intro
+       copy, and the stats). These classes are home-only, so other pages and the
+       desktop layout are untouched. */
+    .hero {
+        text-align: center;
+    }
+
+    .intro-copy__text {
+        text-align: center;
+        align-items: center;
+    }
+
+    .intro-copy__more {
+        width: 100%;
+    }
+
+    .stats div {
+        align-items: center;
+        text-align: center;
+    }
+
     /* S2 — the Bay Area map has no hover spotlight on touch, so shrink it (it
        ate a whole screen as a faint ghost) and lift the base opacity so it
        reads as a deliberate small graphic */
@@ -2391,12 +2412,14 @@ section:has(+ .about-rule) {
         --tower-zoom: 1.7;
     }
 
-    /* pull the tower up (from the -26px default) so its dense structure fills to
-       the top of the section: 01 lands on the near tower's dark cross-beam, the
-       bright sky opening sits on 02, and 03 falls on the lower/far-tower structure.
-       Small px offset stays stable across phone heights. */
+    /* Show the WHOLE tower (draw it near 1:1 instead of the 1.7 leg-zoom) so its
+       three stacked openings line up with the three visible steps: 01, 02 and 03
+       each sit vertically centred in an opening, between the tower's cross-braces.
+       This is decoupled from --tower-zoom on purpose — that still drives fitBridge's
+       leg/column width (the copy keeps its width); only the drawn image shrinks. */
     .process-band::before {
-        background-position: center -120px;
+        background-size: auto 103%;
+        background-position: center -48px;
     }
 
     /* smaller number circles + rail + a thinner drawn spine → more room for copy,
