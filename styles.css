@@ -675,6 +675,12 @@ section {
     text-align-last: justify;
 }
 
+/* the mobile-only line break (splits the four services 2 + 2); on desktop the
+   line stays single, so the middle separator shows as a normal middot instead */
+.hero__sub-nl {
+    display: none;
+}
+
 /* ---------------------------------------------------------------- Intro copy */
 
 .intro-copy {
@@ -2336,15 +2342,28 @@ section:has(+ .about-rule) {
         width: 100%;
     }
 
-    /* H1 — justify the sub-line so each line fills the width; shrink it (and the
-       eyebrow, to match) so the four services fit on two lines instead of three */
+    /* H1 — the four services split 2 + 2 on a forced break and centre each line,
+       instead of justifying two lines to the edges (which stretched the gaps
+       around the middots unevenly). A little word-spacing gives the middots even
+       breathing room so the line reads cleanly, not wonky. */
     .hero__sub {
         margin-top: 1.75rem;
         font-size: 0.66rem;
-        text-align: justify;
-        text-align-last: justify;
+        text-align: center;
+        /* override the base rule's justify so the two lines centre with even
+           spacing instead of being stretched to the edges */
+        text-align-last: center;
         letter-spacing: 0.06em;
-        line-height: 1.85;
+        word-spacing: 0.14em;
+        line-height: 2;
+    }
+
+    .hero__sub-cut {
+        display: none;
+    }
+
+    .hero__sub-nl {
+        display: inline;
     }
 
     .hero .eyebrow {
@@ -2372,11 +2391,12 @@ section:has(+ .about-rule) {
         --tower-zoom: 1.7;
     }
 
-    /* drop the tower down a touch so markers 01 + 03 land on the near tower's two
-       dark cross-beams (image-fracs ~0.107 and ~0.343), with the bright sky
-       opening centred on 02. Small px offset stays stable across phone heights. */
+    /* pull the tower up (from the -26px default) so its dense structure fills to
+       the top of the section: 01 lands on the near tower's dark cross-beam, the
+       bright sky opening sits on 02, and 03 falls on the lower/far-tower structure.
+       Small px offset stays stable across phone heights. */
     .process-band::before {
-        background-position: center 50px;
+        background-position: center -120px;
     }
 
     /* smaller number circles + rail + a thinner drawn spine → more room for copy,
