@@ -2398,12 +2398,13 @@ section:has(+ .about-rule) {
         --tower-zoom: 1.75;
     }
 
-    /* Nudge the tower down a touch from the -26px base (so the steps sit a little
-       higher on the image): 01 and 03 land centred on the tower's cross-braces
-       (image-fracs ~0.107 and ~0.343) with the bright opening on 02, and each
-       description clears the brace below it. */
+    /* Position the tower so the ENTIRE text block (title + description) of steps
+       01 and 03 sits centred over the tower's two dark cross-members (the upper
+       portal and the deck band), with the bright opening on 02. The two dark
+       bands are ~348px apart vs the ~357px block spacing, so -20px splits the
+       small difference (each block within a few px of its band centre). */
     .process-band::before {
-        background-position: center 35px;
+        background-position: center -20px;
     }
 
     /* smaller number circles + rail + a thinner drawn spine → more room for copy,
