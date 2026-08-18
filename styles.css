@@ -2370,24 +2370,10 @@ section:has(+ .about-rule) {
         font-size: 0.66rem;
     }
 
-    /* Centre the whole home page on phones (hero eyebrow/headline/sub, the intro
-       copy, and the stats). These classes are home-only, so other pages and the
-       desktop layout are untouched. */
+    /* Centre the hero on phones (eyebrow, headline, sub). Home-only class, so
+       other pages and the desktop layout are untouched. Everything below the hero
+       (intro copy, stats) keeps its original left-aligned layout. */
     .hero {
-        text-align: center;
-    }
-
-    .intro-copy__text {
-        text-align: center;
-        align-items: center;
-    }
-
-    .intro-copy__more {
-        width: 100%;
-    }
-
-    .stats div {
-        align-items: center;
         text-align: center;
     }
 
