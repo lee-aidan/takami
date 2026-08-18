@@ -2392,14 +2392,18 @@ section:has(+ .about-rule) {
 /* Process bridge on phones — placed after the base .journey rules so these win
    on source order. Smaller copy + a slightly bolder drawn spine. */
 @media (max-width: 720px) {
-    /* Match the DESKTOP bridge framing: same tower-zoom (1.75) and the base
-       -26px position, so the four steps land at the same image fractions the
-       desktop uses (~0.15 / 0.27 / 0.39 / 0.51). fitBridge reads this same zoom
-       for the leg/column width, auto-fitting the smaller mobile font to 3 lines —
-       so the framing carries over under the new font/spacing. (No ::before
-       override here: it inherits the base center -26px / auto 175%.) */
+    /* Match the DESKTOP bridge framing: same tower-zoom (1.75) drives fitBridge's
+       leg/column width, auto-fitting the smaller mobile font to 3 lines. */
     .process-band {
         --tower-zoom: 1.75;
+    }
+
+    /* Nudge the tower down a touch from the -26px base (so the steps sit a little
+       higher on the image): 01 and 03 land centred on the tower's cross-braces
+       (image-fracs ~0.107 and ~0.343) with the bright opening on 02, and each
+       description clears the brace below it. */
+    .process-band::before {
+        background-position: center 35px;
     }
 
     /* smaller number circles + rail + a thinner drawn spine → more room for copy,
