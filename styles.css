@@ -2372,6 +2372,13 @@ section:has(+ .about-rule) {
         --tower-zoom: 1.7;
     }
 
+    /* drop the tower down a touch so markers 01 + 03 land on the near tower's two
+       dark cross-beams (image-fracs ~0.107 and ~0.343), with the bright sky
+       opening centred on 02. Small px offset stays stable across phone heights. */
+    .process-band::before {
+        background-position: center 50px;
+    }
+
     /* smaller number circles + rail + a thinner drawn spine → more room for copy,
        so the words sit framed inside the bridge like the desktop version */
     .journey__step {

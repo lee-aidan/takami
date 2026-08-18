@@ -271,7 +271,11 @@
     if (journey) {
         var line = journey.querySelector('.journey__line');
         var markers = [].slice.call(journey.querySelectorAll('.journey__marker'));
-        if (line && motionOK) {
+        // The spine fill tracks the reader's own scroll position (a progress
+        // indicator, not autonomous motion), so it runs even under
+        // prefers-reduced-motion — the "scroll bar" filling as you move down the
+        // section is the whole point, and it never auto-plays or flashes.
+        if (line) {
             var drawJourney = function () {
                 var r = journey.getBoundingClientRect();
                 var vh = window.innerHeight || document.documentElement.clientHeight;
@@ -292,10 +296,8 @@
             window.addEventListener('resize', drawJourney);
             drawJourney();
         } else {
-            // reduced motion (or no line): show the spine fully drawn + all numbers
-            // filled, so the "scroll bar" and dark markers are still present
+            // no line element to draw: just mark the numbers filled
             markers.forEach(function (m) { m.classList.add('is-reached'); });
-            if (line) line.style.height = '100%';
         }
 
         // ---- "Live in the bridge": size the copy to the tower legs and auto-fit
