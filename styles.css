@@ -2377,6 +2377,16 @@ section:has(+ .about-rule) {
         text-align: center;
     }
 
+    /* Founder quote: the desktop 34rem cap never engages on phones (always 90vw),
+       and 90vw wraps differently per device — some widths orphan a single word
+       ("process.", "lightly.") on the last line. Cap the width at 21rem (~336px)
+       so every phone gets the same clean wrap: "Takami Engineering Group" stays on
+       line 1 and every line stays full, with NO reliance on text-wrap: pretty
+       (which some mobile browsers ignore). Verified greedy-wrap at 336px. */
+    .quote {
+        max-width: min(90vw, 21rem);
+    }
+
     /* S2 — the Bay Area map has no hover spotlight on touch, so shrink it (it
        ate a whole screen as a faint ghost) and lift the base opacity so it
        reads as a deliberate small graphic */
@@ -2389,6 +2399,15 @@ section:has(+ .about-rule) {
     }
 }
 
+/* Very narrow phones (SE-1 class): 90vw drops below the 21rem quote cap, so the
+   24px quote lead would split "Takami Engineering Group" across two lines. Shrink
+   it just enough to keep the name on line 1 and the wrap clean. */
+@media (max-width: 360px) {
+    .quote__lead {
+        font-size: 1.35rem;
+    }
+}
+
 /* Process bridge on phones — placed after the base .journey rules so these win
    on source order. Smaller copy + a slightly bolder drawn spine. */
 @media (max-width: 720px) {
@@ -2398,13 +2417,9 @@ section:has(+ .about-rule) {
         --tower-zoom: 1.75;
     }
 
-    /* Position the tower so the ENTIRE text block (title + description) of steps
-       01 and 03 sits centred over the tower's two dark cross-members (the upper
-       portal and the deck band), with the bright opening on 02. The two dark
-       bands are ~348px apart vs the ~357px block spacing, so -20px splits the
-       small difference (each block within a few px of its band centre). */
+    /* Same framing as desktop (base -26px), nudged a few pixels down. */
     .process-band::before {
-        background-position: center -20px;
+        background-position: center -18px;
     }
 
     /* smaller number circles + rail + a thinner drawn spine → more room for copy,
