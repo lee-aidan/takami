@@ -113,6 +113,8 @@
             navToggle.classList.toggle('is-open', open);
             navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
             navLinks.classList.toggle('is-open', open);
+            // lock the page behind the full-height overlay so it can't scroll under it
+            document.body.classList.toggle('nav-open', open);
         };
         navToggle.addEventListener('click', function () {
             setNav(!navToggle.classList.contains('is-open'));

@@ -315,28 +315,46 @@ body.scrolled .nav {
 /* --- mobile menu toggle --- */
 .nav__toggle {
     display: none;
-    flex-direction: column;
-    gap: 5px;
+    position: relative;
+    width: 24px;
+    height: 16px;
+    box-sizing: content-box;
+    padding: 0.5rem;
+    margin: -0.5rem;
     -webkit-appearance: none;
     appearance: none;
     background: none;
     border: 0;
-    padding: 0.5rem;
-    margin: -0.5rem;
     cursor: pointer;
     color: var(--ink);
 }
 
+/* Each bar is centred on the button (left/top 50%) and offset only by transform,
+   so the two outer bars land on the EXACT same point when open — a clean X with
+   no sub-pixel gap (the old flex + 1.5px translate left dots on iOS). Only
+   transform/opacity animate, so it stays smooth on every browser. */
 .nav__toggle span {
-    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
     width: 24px;
     height: 1.5px;
+    margin: -0.75px 0 0 -12px;
     background: currentColor;
-    transition: transform 0.35s var(--ease), opacity 0.3s var(--ease);
+    transform-origin: center;
+    transition: transform 0.3s var(--ease), opacity 0.2s var(--ease);
+}
+
+.nav__toggle span:nth-child(1) {
+    transform: translateY(-6px) rotate(0);
+}
+
+.nav__toggle span:nth-child(3) {
+    transform: translateY(6px) rotate(0);
 }
 
 .nav__toggle.is-open span:nth-child(1) {
-    transform: translateY(6.5px) rotate(45deg);
+    transform: translateY(0) rotate(45deg);
 }
 
 .nav__toggle.is-open span:nth-child(2) {
@@ -344,26 +362,31 @@ body.scrolled .nav {
 }
 
 .nav__toggle.is-open span:nth-child(3) {
-    transform: translateY(-6.5px) rotate(-45deg);
+    transform: translateY(0) rotate(-45deg);
 }
 
 @media (max-width: 720px) {
     .nav__toggle {
-        display: inline-flex;
+        display: block;
     }
 
+    /* Full-height overlay from the header to the bottom of the screen, so no page
+       content peeks below the menu. Fades + eases down as one smooth panel. */
     .nav__links {
         position: fixed;
         top: var(--header-h);
         left: 0;
         right: 0;
+        bottom: 0;
         flex-direction: column;
         align-items: stretch;
+        justify-content: flex-start;
         gap: 0;
         padding: 0.25rem var(--pad) 1.25rem;
         background: var(--paper);
-        border-bottom: 1px solid var(--line);
-        transform: translateY(-10px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        transform: translateY(-8px);
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s var(--ease), transform 0.3s var(--ease),
@@ -395,7 +418,8 @@ body.scrolled .nav {
 
 /* ---------------------------------------------------------------- Intro */
 
-body.intro-lock {
+body.intro-lock,
+body.nav-open {
     overflow: hidden;
 }
 
